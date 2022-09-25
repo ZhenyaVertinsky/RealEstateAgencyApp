@@ -40,11 +40,11 @@ public class Main {
         agent.setAgentName("Update Prepared");
         agent.setModificationDate(new Timestamp(new Date().getTime()));
 
-        Agent agent2 = agentRepository.update(agent);
-
-        System.out.println(agent2);
-
-        agentRepository.delete(7L);
+//        Agent agent2 = agentRepository.update(agent);
+//
+//        System.out.println(agent2);
+//
+//        agentRepository.delete(7L);
 
         Map<String, Object> agentStats =
                 agentRepository.getAgentsStats();

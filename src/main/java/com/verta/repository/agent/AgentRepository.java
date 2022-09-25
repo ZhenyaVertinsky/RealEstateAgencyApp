@@ -208,8 +208,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     @Override
     public Long delete(Long id) {
-        final String deleteQuery =
-                "delete from entity.agents  where id = ?";
+        final String deleteQuery = "delete from entity.agents  where id = ?";
 
         Connection connection;
         PreparedStatement statement;
@@ -229,8 +228,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     @Override
     public Map<String, Object> getAgentsStats() {
-        final String callFunction =
-                "select entity.get_agents_stats_average_percent_reward(?)";
+        final String callFunction = "select entity.get_agents_stats_average_percent_reward(?)";
 
         Connection connection;
         PreparedStatement statement;

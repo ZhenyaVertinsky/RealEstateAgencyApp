@@ -18,6 +18,7 @@ import java.sql.Timestamp;
 // @ToString (exclude = {"isDeleted"})
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class Agent {
 
     private Long id;
