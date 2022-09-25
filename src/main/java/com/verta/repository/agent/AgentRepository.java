@@ -2,7 +2,7 @@ package com.verta.repository.agent;
 
 import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
-import com.verta.filter.AuthHeaderFilter;
+
 import com.verta.util.DatabasePropertiesReader;
 import org.apache.commons.lang3.StringUtils;
 
