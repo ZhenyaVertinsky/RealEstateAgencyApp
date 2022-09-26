@@ -91,7 +91,7 @@ public class AgentRepository implements AgentRepositoryInterface {
         return DriverManager.getConnection(jdbcURL, login, password);
     }
 
-    private Agent agentRowMapping (ResultSet rs) throws SQLException {
+    private Agent agentRowMapping(ResultSet rs) throws SQLException {
         Agent agent = new Agent();
         agent.setId(rs.getLong(ID));
         agent.setAgentName(rs.getString(NAME));
@@ -101,9 +101,22 @@ public class AgentRepository implements AgentRepositoryInterface {
         agent.setPercentReward(rs.getInt(REWARD));
         agent.setCreationDate(rs.getTimestamp(CREATED));
         agent.setModificationDate(rs.getTimestamp(CHANGED));
-        agent.setDeleted(rs.getBoolean(IS_DELETED));
+        agent.setIsDeleted(rs.getBoolean(IS_DELETED));
 
         return agent;
+
+//        return Agent.builder()
+//                .id(rs.getLong(ID))
+//                .agentName(rs.getString(NAME))
+//                .agentSurname(rs.getString(SURNAME))
+//                .birthday(rs.getTimestamp(BIRTH_DATE))
+//                .agentPhone(rs.getString(PHONE))
+//                .percentReward(rs.getInt(REWARD))
+//                .creationDate(rs.getTimestamp(CREATED))
+//                .modificationDate(rs.getTimestamp(CHANGED))
+//                .isDeleted(rs.getBoolean(IS_DELETED))
+//                .build();
+
     }
 
     @Override
@@ -153,7 +166,7 @@ public class AgentRepository implements AgentRepositoryInterface {
             statement.setInt(5, object.getPercentReward());
             statement.setTimestamp(6, object.getCreationDate());
             statement.setTimestamp(7, object.getModificationDate());
-            statement.setBoolean(8, object.isDeleted());
+            statement.setBoolean(8, object.getIsDeleted());
 
             //executeUpdate - for INSERT, UPDATE, DELETE
             statement.executeUpdate();
@@ -194,7 +207,7 @@ public class AgentRepository implements AgentRepositoryInterface {
             statement.setInt(5, object.getPercentReward());
             statement.setTimestamp(6, object.getCreationDate());
             statement.setTimestamp(7, object.getModificationDate());
-            statement.setBoolean(8, object.isDeleted());
+            statement.setBoolean(8, object.getIsDeleted());
             statement.setLong(9, object.getId());
 
             statement.executeUpdate();

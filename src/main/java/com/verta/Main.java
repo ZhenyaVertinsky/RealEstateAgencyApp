@@ -19,27 +19,27 @@ public class Main {
             System.out.println(agent);
         }
 
-        agentRepository.findOne(1L).ifPresent(System.out::println);
-
-        Agent agent = new Agent();
-        agent.setAgentName("New");
-        agent.setAgentSurname("Agent");
-        agent.setBirthday(new Timestamp(new Date().getTime()));
-        agent.setAgentPhone("375290000000");
-        agent.setPercentReward(10);
-        agent.setCreationDate(new Timestamp(new Date().getTime()));
-        agent.setModificationDate(new Timestamp(new Date().getTime()));
-        agent.setDeleted(false);
-
-        System.out.println(agent);
-
-        Agent agent1 = agentRepository.create(agent);
-        System.out.println(agent1);
-
-        agent.setId(agent1.getId());
-        agent.setAgentName("Update Prepared");
-        agent.setModificationDate(new Timestamp(new Date().getTime()));
-
+//        agentRepository.findOne(1L).ifPresent(System.out::println);
+//
+//        Agent agent = new Agent();
+//        agent.setAgentName("New");
+//        agent.setAgentSurname("Agent");
+//        agent.setBirthday(new Timestamp(new Date().getTime()));
+//        agent.setAgentPhone("375290000000");
+//        agent.setPercentReward(10);
+//        agent.setCreationDate(new Timestamp(new Date().getTime()));
+//        agent.setModificationDate(new Timestamp(new Date().getTime()));
+//        agent.setIsDeleted(false);
+//
+//        System.out.println(agent);
+//
+//        Agent agent1 = agentRepository.create(agent);
+//        System.out.println(agent1);
+//
+//        agent.setId(agent1.getId());
+//        agent.setAgentName("Update Prepared");
+//        agent.setModificationDate(new Timestamp(new Date().getTime()));
+//
 //        Agent agent2 = agentRepository.update(agent);
 //
 //        System.out.println(agent2);

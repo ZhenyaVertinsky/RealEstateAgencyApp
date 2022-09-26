@@ -1,6 +1,7 @@
 package com.verta.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import java.sql.Timestamp;
 // @ToString (exclude = {"isDeleted"})
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Builder
 public class Agent {
 
     private Long id;
@@ -37,7 +38,7 @@ public class Agent {
 
     private Timestamp modificationDate;
 
-    private boolean isDeleted;
+    private Boolean isDeleted;
 
     @Override
     public String toString() {
