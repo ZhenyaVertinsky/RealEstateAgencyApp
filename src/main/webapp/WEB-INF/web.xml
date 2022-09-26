@@ -90,7 +90,7 @@
 
         <!--Tomcat -> webapp -> myapp.war -> myapp ->-->
         <!--META-INF-->
-        <!--WEB-INF (Р·Р°РєСЂС‹С‚С‹Р№ РґРѕСЃС‚СѓРї, РЅР°РїСЂСЏРјСѓСЋ РЅРµ РІС‹С‚СЏРЅСѓС‚СЊ) -> web.xml -> localhost:8080/myapp/hello-->
+        <!--WEB-INF (закрытый доступ, напрямую не вытянуть) -> web.xml -> localhost:8080/myapp/hello-->
         <!--index.html || index.jsp-->
 
         <!--Serlet = class that operate with http-->

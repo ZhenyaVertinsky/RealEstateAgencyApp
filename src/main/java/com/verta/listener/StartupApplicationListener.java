@@ -4,7 +4,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 public class StartupApplicationListener implements ServletContextListener {
-//
+
+
 //    @Override
 //    public void contextInitialized(ServletContextEvent sce) {
 //        ServletContextListener.super.contextInitialized(sce);
@@ -26,4 +27,5 @@ public class StartupApplicationListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
         System.out.println("Context Is DOWN");
     }
+
 }
