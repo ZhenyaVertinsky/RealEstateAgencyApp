@@ -9,4 +9,5 @@ public class Test {
 //
 //        System.out.println(a+b);
 //    }
+    private int a;
 }
