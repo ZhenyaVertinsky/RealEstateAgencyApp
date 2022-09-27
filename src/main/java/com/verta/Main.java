@@ -52,5 +52,7 @@ public class Main {
         for (Map.Entry<String, Object> stringObjectEntry : agentStats.entrySet()) {
             System.out.println(stringObjectEntry.getValue());
         }
+
+        System.out.println("Hello");
     }
 }
