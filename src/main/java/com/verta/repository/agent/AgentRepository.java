@@ -5,6 +5,8 @@ import com.verta.exeption.NoSuchEntityException;
 
 import com.verta.util.DatabasePropertiesReader;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,6 +37,8 @@ import static com.verta.util.DatabasePropertiesReader.DATABASE_PORT;
 import static com.verta.util.DatabasePropertiesReader.DATABASE_URL;
 import static com.verta.util.DatabasePropertiesReader.POSTGRES_DRIVER_NAME;
 
+@Repository
+@Primary
 public class AgentRepository implements AgentRepositoryInterface {
 
     @Override
