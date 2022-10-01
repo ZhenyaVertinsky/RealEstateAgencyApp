@@ -6,6 +6,10 @@ import com.verta.service.AgentService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Map;
+
 public class SpringTest {
     public static void main(String[] args) {
         // At the beginning of main ClassPathXmlApplicationContext read all from application-context.xml create
@@ -36,9 +40,32 @@ public class SpringTest {
         // Next we say "context give us spring Bean, and we call on him a method"
         AgentService agentService = annotationConfigApplicationContext.getBean(AgentService.class);
 
-        for (Agent agent : agentService.findAll()) {
-            System.out.println(agent);
-        }
+//        Map<String, Object> agentStats = agentService.getAgentStats();
+//
+//        for (Agent agent : agentService.findAll()) {
+//            System.out.println(agent);
+//        }
+//
+//        for (Map.Entry<String, Object> stringObjectEntry : agentStats.entrySet()) {
+//            System.out.println(stringObjectEntry.getKey() + " " + stringObjectEntry.getValue());
+//        }
+
+        Agent agent = new Agent();
+        agent.setAgentName("JDBC");
+        agent.setAgentSurname("Template");
+        agent.setBirthday(new Timestamp(new Date().getTime()));
+        agent.setAgentPhone("375335556665");
+        agent.setPercentReward(30);
+        agent.setCreationDate(new Timestamp(new Date().getTime()));
+        agent.setModificationDate(new Timestamp(new Date().getTime()));
+        agent.setIsDeleted(false);
+
+        System.out.println(agent);
+
+        Agent agent1 = agentService.creat(agent);
+        System.out.println(agent1);
+
+
 
 
     }

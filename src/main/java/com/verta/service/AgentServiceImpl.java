@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,16 @@ public class AgentServiceImpl implements AgentService {
 //        }
 
         return agentRepository.findAll();
+    }
+
+    @Override
+    public Map<String, Object> getAgentStats() {
+        return agentRepository.getAgentsStats();
+    }
+
+    @Override
+    public Agent creat(Agent object) {
+        return agentRepository.create(object);
     }
 
 //        @Autowired
