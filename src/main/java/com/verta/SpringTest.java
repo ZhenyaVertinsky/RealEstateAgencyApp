@@ -2,6 +2,7 @@ package com.verta;
 
 import com.verta.domain.Agent;
 import com.verta.repository.agent.AgentRepositoryInterface;
+import com.verta.service.AgentService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,14 +20,26 @@ public class SpringTest {
 //        System.out.println(agent2);
 
 
+        // We have a class which work with annotation
+        // We scan package com.verta
         AnnotationConfigApplicationContext annotationConfigApplicationContext =
                 new AnnotationConfigApplicationContext("com.verta");
 
-        AgentRepositoryInterface agentRepository = annotationConfigApplicationContext.
-                getBean(AgentRepositoryInterface.class);
+//        AgentRepositoryInterface agentRepository = annotationConfigApplicationContext.
+//                getBean(AgentRepositoryInterface.class);
+//
+//        for (Agent agent : agentRepository.findAll()) {
+//            System.out.println(agent);
+//        }
 
-        for (Agent agent : agentRepository.findAll()) {
+        // We have a class which implements AgentService - which have annotation @Service - it is a Bean
+        // Next we say "context give us spring Bean, and we call on him a method"
+        AgentService agentService = annotationConfigApplicationContext.getBean(AgentService.class);
+
+        for (Agent agent : agentService.findAll()) {
             System.out.println(agent);
         }
+
+
     }
 }
