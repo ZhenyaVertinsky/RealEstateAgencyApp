@@ -2,6 +2,7 @@ package com.verta;
 
 import com.verta.domain.Agent;
 import com.verta.repository.agent.AgentRepository;
+import com.verta.util.DatabaseProperties;
 
 
 import java.sql.Timestamp;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        AgentRepository agentRepository = new AgentRepository();
+        AgentRepository agentRepository = new AgentRepository(new DatabaseProperties());
 
         List<Agent> all = agentRepository.findAll();
 

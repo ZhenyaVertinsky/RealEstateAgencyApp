@@ -27,12 +27,19 @@ public class AgentServiceImpl implements AgentService {
     // "final" need to link not change when we do inject
     private final AgentRepositoryInterface agentRepository;
 
+    private final List<AgentRepositoryInterface> interfaces;
+
 //    public AgentServiceImpl(AgentRepositoryInterface agentRepository) {
 //        this.agentRepository = agentRepository;
 //    }
 
     @Override
     public List<Agent> findAll() {
+
+        for (AgentRepositoryInterface anInterface : interfaces) {
+            System.out.println(anInterface);
+        }
+
         return agentRepository.findAll();
     }
 

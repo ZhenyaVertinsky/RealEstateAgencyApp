@@ -3,7 +3,9 @@ package com.verta.repository.agent;
 import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
 
-import com.verta.util.DatabasePropertiesReader;
+
+import com.verta.util.DatabaseProperties;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -30,16 +32,13 @@ import static com.verta.repository.agent.AgentTableColumns.PHONE;
 import static com.verta.repository.agent.AgentTableColumns.REWARD;
 import static com.verta.repository.agent.AgentTableColumns.SURNAME;
 
-import static com.verta.util.DatabasePropertiesReader.DATABASE_LOGIN;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_NAME;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_PASSWORD;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_PORT;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_URL;
-import static com.verta.util.DatabasePropertiesReader.POSTGRES_DRIVER_NAME;
 
 @Repository
 @Primary
+@RequiredArgsConstructor
 public class AgentRepository implements AgentRepositoryInterface {
+
+    private final DatabaseProperties databaseProperties;
 
     @Override
     public Agent findById(Long id) {
@@ -76,7 +75,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     private Connection getConnection() throws SQLException {
         try {
-            String driver = DatabasePropertiesReader.getProperty(POSTGRES_DRIVER_NAME);
+            String driver = databaseProperties.getDriverName();
 
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -84,11 +83,11 @@ public class AgentRepository implements AgentRepositoryInterface {
             throw new RuntimeException("JDBC Driver Cannot be loaded!");
         }
 
-        String url = DatabasePropertiesReader.getProperty(DATABASE_URL);
-        String port = DatabasePropertiesReader.getProperty(DATABASE_PORT);
-        String dbName = DatabasePropertiesReader.getProperty(DATABASE_NAME);
-        String login = DatabasePropertiesReader.getProperty(DATABASE_LOGIN);
-        String password = DatabasePropertiesReader.getProperty(DATABASE_PASSWORD);
+        String url = databaseProperties.getUrl();
+        String port = databaseProperties.getPort();
+        String dbName = databaseProperties.getName();
+        String login = databaseProperties.getLogin();
+        String password = databaseProperties.getPassword();
 
         String jdbcURL = StringUtils.join(url, port, dbName);
 
