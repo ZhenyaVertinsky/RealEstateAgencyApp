@@ -51,10 +51,10 @@ public class SpringTest {
 //        }
 
         Agent agent = new Agent();
-        agent.setAgentName("JDBC");
+        agent.setAgentName("Test");
         agent.setAgentSurname("Template");
         agent.setBirthday(new Timestamp(new Date().getTime()));
-        agent.setAgentPhone("375335556665");
+        agent.setAgentPhone("375330000000");
         agent.setPercentReward(30);
         agent.setCreationDate(new Timestamp(new Date().getTime()));
         agent.setModificationDate(new Timestamp(new Date().getTime()));
