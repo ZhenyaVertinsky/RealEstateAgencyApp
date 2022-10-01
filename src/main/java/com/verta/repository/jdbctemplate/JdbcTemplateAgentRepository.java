@@ -7,9 +7,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,27 +29,53 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
 
     @Override
     public Agent findById(Long id) {
-        return null;
+        return jdbcTemplate.queryForObject("select * from entity.agents where id = " + id, agentRowMapper);
     }
 
     @Override
     public Optional<Agent> findOne(Long id) {
-        return Optional.empty();
+        return Optional.of(findById(id));
     }
 
     @Override
     public List<Agent> findAll() {
-        return jdbcTemplate.query("select * from entity.agents", agentRowMapper);
+        return findAll(DEFAULT_FIND_ALL_LIMIT, DEFAULT_FIND_ALL_OFFSET);
     }
 
     @Override
     public List<Agent> findAll(int limit, int offset) {
-        return null;
+        return jdbcTemplate.query("select * from entity.agents limit" + limit + " offset " +
+                offset, agentRowMapper);
     }
 
     @Override
     public Agent create(Agent object) {
-        return null;
+        final String insertQuery =
+                "insert into entity.agents (agent_name, agent_surname, birthday, agent_phone, percent_reward, " +
+                        "creation_date, modification_date, is_deleted)" +
+                        "values (:agentName, :agentSurname, :birthday, :agentPhone, :percentReward, :creationDate, " +
+                        ":modificationDate, :isDeleted);";
+
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("agentName", object.getAgentName());
+        mapSqlParameterSource.addValue("agentSurname", object.getAgentSurname());
+        mapSqlParameterSource.addValue("birthday", object.getBirthday());
+        mapSqlParameterSource.addValue("agentPhone", object.getAgentPhone());
+        mapSqlParameterSource.addValue("percentReward", object.getPercentReward());
+        mapSqlParameterSource.addValue("creationDate", object.getCreationDate());
+        mapSqlParameterSource.addValue("modificationDate", object.getModificationDate());
+        mapSqlParameterSource.addValue("isDeleted", object.getIsDeleted());
+
+        namedParameterJdbcTemplate.update(insertQuery, mapSqlParameterSource);
+
+        Long lastInsertId = namedParameterJdbcTemplate.query("SELECT currval('entity.agents_id_seq') as last_id",
+                resultSet -> {
+
+            resultSet.next();
+            return resultSet.getLong("last_id");
+        });
+
+        return findById(lastInsertId);
     }
 
     @Override
@@ -57,11 +85,17 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
 
     @Override
     public Long delete(Long id) {
-        return null;
+        jdbcTemplate.update("delete from entity.agents  where id " + id);
+        return id;
     }
 
     @Override
     public Map<String, Object> getAgentsStats() {
-        return null;
+        return jdbcTemplate.query("select entity.get_agents_stats_average_percent_reward(true)",
+                resultSet -> {
+
+            resultSet.next();
+            return Collections.singletonMap("avg", resultSet.getDouble(1));
+        });
     }
 }
