@@ -34,7 +34,7 @@ import static com.verta.repository.agent.AgentTableColumns.SURNAME;
 
 
 @Repository
-@Primary
+//@Primary
 @RequiredArgsConstructor
 public class AgentRepository implements AgentRepositoryInterface {
 
@@ -96,6 +96,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     private Agent agentRowMapping(ResultSet rs) throws SQLException {
         Agent agent = new Agent();
+
         agent.setId(rs.getLong(ID));
         agent.setAgentName(rs.getString(NAME));
         agent.setAgentSurname(rs.getString(SURNAME));
