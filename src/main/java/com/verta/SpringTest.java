@@ -40,15 +40,17 @@ public class SpringTest {
         // Next we say "context give us spring Bean, and we call on him a method"
         AgentService agentService = annotationConfigApplicationContext.getBean(AgentService.class);
 
-//        Map<String, Object> agentStats = agentService.getAgentStats();
-//
-//        for (Agent agent : agentService.findAll()) {
-//            System.out.println(agent);
-//        }
-//
-//        for (Map.Entry<String, Object> stringObjectEntry : agentStats.entrySet()) {
-//            System.out.println(stringObjectEntry.getKey() + " " + stringObjectEntry.getValue());
-//        }
+        agentService.findById(156373L);
+
+        Map<String, Object> agentStats = agentService.getAgentStats();
+
+        for (Agent agent : agentService.findAll()) {
+            System.out.println(agent);
+        }
+
+        for (Map.Entry<String, Object> stringObjectEntry : agentStats.entrySet()) {
+            System.out.println(stringObjectEntry.getKey() + " " + stringObjectEntry.getValue());
+        }
 
         Agent agent = new Agent();
         agent.setAgentName("Test");
