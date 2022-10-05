@@ -4,11 +4,9 @@ import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
 
 
-import com.verta.util.DatabaseProperties;
+import com.verta.configuration.DatabaseProperties;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
