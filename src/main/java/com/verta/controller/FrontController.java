@@ -1,7 +1,7 @@
 package com.verta.controller;
 
 import com.verta.repository.agent.AgentRepository;
-import com.verta.util.DatabaseProperties;
+import com.verta.configuration.DatabaseProperties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

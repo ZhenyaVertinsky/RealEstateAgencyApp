@@ -12,4 +12,6 @@ public interface AgentService {
     Map<String, Object> getAgentStats();
 
     Agent creat (Agent object);
+
+    Agent findById (Long agentId);
 }

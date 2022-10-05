@@ -4,10 +4,9 @@ import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
 
 
-import com.verta.util.DatabaseProperties;
+import com.verta.configuration.DatabaseProperties;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.context.annotation.Primary;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
@@ -31,12 +30,14 @@ import static com.verta.repository.agent.AgentTableColumns.NAME;
 import static com.verta.repository.agent.AgentTableColumns.PHONE;
 import static com.verta.repository.agent.AgentTableColumns.REWARD;
 import static com.verta.repository.agent.AgentTableColumns.SURNAME;
+import static com.verta.util.UUIDGenerator.generateUUID;
 
 
 @Repository
 //@Primary
 @RequiredArgsConstructor
 public class AgentRepository implements AgentRepositoryInterface {
+    private static final Logger log = Logger.getLogger(AgentRepository.class);
 
     private final DatabaseProperties databaseProperties;
 
@@ -56,11 +57,11 @@ public class AgentRepository implements AgentRepositoryInterface {
             if (hasRow) {
                 return agentRowMapping(rs);
             } else {
-                throw new NoSuchEntityException("Entity Agent with id " + id + " does not exist", 404);
+                throw new NoSuchEntityException("Entity Agent with id " + id + " does not exist", 404, generateUUID());
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            throw new RuntimeException("SQL Issues!");
+            log.error("DB connection process issues", e);
+            throw new RuntimeException("DB connection process issues");
         }
     }
 
@@ -79,19 +80,22 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
+            log.error("JDBC Driver Cannot be loaded!", e);
             System.err.println("JDBC Driver Cannot be loaded!");
             throw new RuntimeException("JDBC Driver Cannot be loaded!");
         }
 
         String url = databaseProperties.getUrl();
-        String port = databaseProperties.getPort();
-        String dbName = databaseProperties.getName();
+//        String port = databaseProperties.getPort();
+//        String dbName = databaseProperties.getName();
         String login = databaseProperties.getLogin();
         String password = databaseProperties.getPassword();
 
-        String jdbcURL = StringUtils.join(url, port, dbName);
+//        String jdbcURL = StringUtils.join(url, port, dbName);
 
-        return DriverManager.getConnection(jdbcURL, login, password);
+//        return DriverManager.getConnection(jdbcURL, login, password);
+
+        return DriverManager.getConnection(url, login, password);
     }
 
     private Agent agentRowMapping(ResultSet rs) throws SQLException {
@@ -144,6 +148,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return result;
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -184,6 +189,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return findById(userLastInsertId);
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -218,6 +224,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return findById(object.getId());
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -238,6 +245,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return id;
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -261,6 +269,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return Collections.singletonMap("avg", functionCall);
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }

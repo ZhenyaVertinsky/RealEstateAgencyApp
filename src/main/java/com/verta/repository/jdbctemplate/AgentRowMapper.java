@@ -1,6 +1,7 @@
 package com.verta.repository.jdbctemplate;
 
 import com.verta.domain.Agent;
+import org.apache.log4j.Logger;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,12 @@ import static com.verta.repository.agent.AgentTableColumns.SURNAME;
 
 public class AgentRowMapper implements RowMapper<Agent> {
 
+    private static final Logger Log = Logger.getLogger(AgentRowMapper.class);
+
     @Override
     public Agent mapRow(ResultSet rs, int i) throws SQLException {
+        Log.info("Agent row mapping start");
+
         Agent agent = new Agent();
 
         agent.setId(rs.getLong(ID));
@@ -35,6 +40,7 @@ public class AgentRowMapper implements RowMapper<Agent> {
         agent.setModificationDate(rs.getTimestamp(CHANGED));
         agent.setIsDeleted(rs.getBoolean(IS_DELETED));
 
+        Log.info("Agent row mapping end");
         return agent;
     }
 }

@@ -54,7 +54,12 @@ public class AgentServiceImpl implements AgentService {
         return agentRepository.create(object);
     }
 
-//        @Autowired
+    @Override
+    public Agent findById(Long agentId) {
+        return agentRepository.findById(agentId);
+    }
+
+    //        @Autowired
 //    //@Inject
 //    public void setAgentRepository(@Qualifier("agentRepository") AgentRepositoryInterface agentRepository) {
 //        this.agentRepository = agentRepository;
