@@ -3,9 +3,9 @@ package com.verta.controller;
 import com.verta.domain.Agent;
 import com.verta.service.AgentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,7 +18,7 @@ public class AgentController {
 
     private final AgentService agentService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/agents")
+    @GetMapping("/agents")
     public ModelAndView findAllAgents() {
         List<Agent> agents = agentService.findAll();
 
@@ -26,7 +26,22 @@ public class AgentController {
         model.addObject("agent", "Zhenya");
         model.addObject("agents", agents);
 
-        model.setViewName("hello");
+        model.setViewName("agents");
+
+        return model;
+    }
+    @GetMapping("/agents/{id}")
+    public ModelAndView findAgentById(@PathVariable String id) {
+
+        //We have added id parsing and number format checking
+        long agentId = Long.parseLong(id);
+        Agent agent = agentService.findById(agentId);
+
+        ModelAndView model = new ModelAndView();
+        model.addObject("agentName", agent.getAgentName());
+        model.addObject("agent", agent);
+
+        model.setViewName("agent");
 
         return model;
     }
