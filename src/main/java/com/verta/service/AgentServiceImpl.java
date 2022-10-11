@@ -59,6 +59,11 @@ public class AgentServiceImpl implements AgentService {
         return agentRepository.findById(agentId);
     }
 
+    @Override
+    public List<Agent> search(int limit, int offset) {
+        return agentRepository.findAll(limit, offset);
+    }
+
     //        @Autowired
 //    //@Inject
 //    public void setAgentRepository(@Qualifier("agentRepository") AgentRepositoryInterface agentRepository) {
