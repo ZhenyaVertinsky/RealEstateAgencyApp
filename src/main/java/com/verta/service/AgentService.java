@@ -14,4 +14,6 @@ public interface AgentService {
     Agent creat (Agent object);
 
     Agent findById (Long agentId);
+
+    List<Agent> search(int limit, int offset);
 }
