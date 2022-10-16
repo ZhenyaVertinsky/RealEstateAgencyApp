@@ -50,6 +50,7 @@ public class AgentRestController {
     @GetMapping
     //@ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> findAllAgents() {
+
         return new ResponseEntity<>(Collections.singletonMap("result", agentService.findAll()), HttpStatus.OK);
     }
 
@@ -73,7 +74,6 @@ public class AgentRestController {
 
         //We have added id parsing and number format checking
         long agentId = Long.parseLong(id);
-        Agent agent = agentService.findById(agentId);
 
         return new ResponseEntity<>(Collections.singletonMap("agent", agentService.findById(agentId)), HttpStatus.OK);
     }
