@@ -4,7 +4,6 @@ import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
 
 
-import com.verta.configuration.DatabaseProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
@@ -38,8 +37,6 @@ import static com.verta.util.UUIDGenerator.generateUUID;
 @RequiredArgsConstructor
 public class AgentRepository implements AgentRepositoryInterface {
     private static final Logger log = Logger.getLogger(AgentRepository.class);
-
-    private final DatabaseProperties databaseProperties;
 
     @Override
     public Agent findById(Long id) {
@@ -76,7 +73,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     private Connection getConnection() throws SQLException {
         try {
-            String driver = databaseProperties.getDriverName();
+            String driver = "databaseProperties.getDriverName()";
 
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
@@ -85,11 +82,11 @@ public class AgentRepository implements AgentRepositoryInterface {
             throw new RuntimeException("JDBC Driver Cannot be loaded!");
         }
 
-        String url = databaseProperties.getUrl();
+        String url = "databaseProperties.getUrl()";
 //        String port = databaseProperties.getPort();
 //        String dbName = databaseProperties.getName();
-        String login = databaseProperties.getLogin();
-        String password = databaseProperties.getPassword();
+        String login = "databaseProperties.getLogin()";
+        String password = "databaseProperties.getPassword()";
 
 //        String jdbcURL = StringUtils.join(url, port, dbName);
 
