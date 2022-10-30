@@ -2,17 +2,14 @@ package com.verta;
 
 import com.verta.domain.Agent;
 import com.verta.repository.agent.AgentRepository;
-import com.verta.configuration.DatabaseProperties;
 
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        AgentRepository agentRepository = new AgentRepository(new DatabaseProperties());
+        AgentRepository agentRepository = new AgentRepository();
 
         List<Agent> all = agentRepository.findAll();
 

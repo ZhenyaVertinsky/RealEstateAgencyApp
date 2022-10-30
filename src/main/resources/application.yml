@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    hikari:
+      jdbc-url: "jdbc:postgresql://localhost:5432/EstateAgency"
+      maximum-pool-size: 10
+      driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: destro123
+    url: "jdbc:postgresql://localhost:5432/EstateAgency"
+server:
+  port: 8081
+
+  ---
+
+  jwt:
+    secret: qwepuisdhfaksdjflsdfn12321___**
+    expiration: 60000

@@ -1,7 +1,6 @@
 package com.verta.controller;
 
 import com.verta.repository.agent.AgentRepository;
-import com.verta.configuration.DatabaseProperties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -32,7 +31,7 @@ public class FrontController extends HttpServlet {
 
             req.setAttribute("agent", "Zhenya");
 
-            AgentRepository agentRepository = new AgentRepository(new DatabaseProperties());
+            AgentRepository agentRepository = new AgentRepository();
 
             req.setAttribute("agents", agentRepository.findAll());
 
