@@ -20,15 +20,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.verta.repository.agent.AgentTableColumns.BIRTH_DATE;
-import static com.verta.repository.agent.AgentTableColumns.CHANGED;
-import static com.verta.repository.agent.AgentTableColumns.CREATED;
-import static com.verta.repository.agent.AgentTableColumns.ID;
-import static com.verta.repository.agent.AgentTableColumns.IS_DELETED;
-import static com.verta.repository.agent.AgentTableColumns.NAME;
-import static com.verta.repository.agent.AgentTableColumns.PHONE;
-import static com.verta.repository.agent.AgentTableColumns.REWARD;
-import static com.verta.repository.agent.AgentTableColumns.SURNAME;
+import static com.verta.repository.columns.AgentTableColumns.BIRTH_DATE;
+import static com.verta.repository.columns.AgentTableColumns.CHANGED;
+import static com.verta.repository.columns.AgentTableColumns.CREATED;
+import static com.verta.repository.columns.AgentTableColumns.ID;
+import static com.verta.repository.columns.AgentTableColumns.IS_DELETED;
+import static com.verta.repository.columns.AgentTableColumns.NAME;
+import static com.verta.repository.columns.AgentTableColumns.PHONE;
+import static com.verta.repository.columns.AgentTableColumns.REWARD;
+import static com.verta.repository.columns.AgentTableColumns.SURNAME;
 import static com.verta.util.UUIDGenerator.generateUUID;
 
 
