@@ -50,4 +50,9 @@ public class TestSpringAgentInterface implements AgentRepositoryInterface {
     public Map<String, Object> getAgentsStats() {
         return null;
     }
+
+    @Override
+    public Optional<Agent> findByLogin(String login) {
+        return Optional.empty();
+    }
 }

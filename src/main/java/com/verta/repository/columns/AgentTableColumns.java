@@ -19,4 +19,9 @@ public interface AgentTableColumns {
     String CHANGED = "modification_date";
 
     String IS_DELETED = "is_deleted";
+
+    String LOGIN = "agent_login";
+
+    String PASSWORD = "agent_password";
+
 }
