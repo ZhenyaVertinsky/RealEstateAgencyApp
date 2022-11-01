@@ -271,4 +271,9 @@ public class AgentRepository implements AgentRepositoryInterface {
             throw new RuntimeException("SQL Issues!");
         }
     }
+
+    @Override
+    public Optional<Agent> findByLogin(String login) {
+        return Optional.empty();
+    }
 }

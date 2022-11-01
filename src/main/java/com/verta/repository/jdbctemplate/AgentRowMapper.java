@@ -13,7 +13,9 @@ import static com.verta.repository.columns.AgentTableColumns.CHANGED;
 import static com.verta.repository.columns.AgentTableColumns.CREATED;
 import static com.verta.repository.columns.AgentTableColumns.ID;
 import static com.verta.repository.columns.AgentTableColumns.IS_DELETED;
+import static com.verta.repository.columns.AgentTableColumns.LOGIN;
 import static com.verta.repository.columns.AgentTableColumns.NAME;
+import static com.verta.repository.columns.AgentTableColumns.PASSWORD;
 import static com.verta.repository.columns.AgentTableColumns.PHONE;
 import static com.verta.repository.columns.AgentTableColumns.REWARD;
 import static com.verta.repository.columns.AgentTableColumns.SURNAME;
@@ -39,6 +41,8 @@ public class AgentRowMapper implements RowMapper<Agent> {
         agent.setCreationDate(rs.getTimestamp(CREATED));
         agent.setModificationDate(rs.getTimestamp(CHANGED));
         agent.setIsDeleted(rs.getBoolean(IS_DELETED));
+        agent.setLogin(rs.getString(LOGIN));
+        agent.setPassword(rs.getString(PASSWORD));
 
         Log.info("Agent row mapping end");
         return agent;

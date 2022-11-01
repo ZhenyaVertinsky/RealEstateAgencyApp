@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
@@ -52,9 +53,9 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
     public Agent create(Agent object) {
         final String insertQuery =
                 "insert into entity.agents (agent_name, agent_surname, birthday, agent_phone, percent_reward, " +
-                        "creation_date, modification_date, is_deleted)" +
+                        "creation_date, modification_date, is_deleted, agent_login, agent_password)" +
                         "values (:agentName, :agentSurname, :birthday, :agentPhone, :percentReward, :creationDate, " +
-                        ":modificationDate, :isDeleted);";
+                        ":modificationDate, :isDeleted, :login, :password);";
 
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("agentName", object.getAgentName());
@@ -65,6 +66,8 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
         mapSqlParameterSource.addValue("creationDate", object.getCreationDate());
         mapSqlParameterSource.addValue("modificationDate", object.getModificationDate());
         mapSqlParameterSource.addValue("isDeleted", object.getIsDeleted());
+        mapSqlParameterSource.addValue("login", object.getLogin());
+        mapSqlParameterSource.addValue("password", object.getPassword());
 
         namedParameterJdbcTemplate.update(insertQuery, mapSqlParameterSource);
 
@@ -90,6 +93,7 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public Map<String, Object> getAgentsStats() {
         return jdbcTemplate.query("select entity.get_agents_stats_average_percent_reward(true)",
                 resultSet -> {
@@ -97,5 +101,15 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
             resultSet.next();
             return Collections.singletonMap("avg", resultSet.getDouble(1));
         });
+    }
+    @Override
+    public Optional<Agent> findByLogin(String login) {
+
+        final String searchByLoginQuery = "select * from entity.agents where agent_login = :login";
+
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("login", login);
+
+        return Optional.of(namedParameterJdbcTemplate.queryForObject(searchByLoginQuery, mapSqlParameterSource, agentRowMapper));
     }
 }
