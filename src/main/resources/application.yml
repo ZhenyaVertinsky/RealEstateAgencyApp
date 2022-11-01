@@ -10,8 +10,8 @@ spring:
 server:
   port: 8081
 
+---
 
-
-  jwt:
-    secret: qwepuisdhfaksdjflsdfn12321___**
-    expiration: 60000
+jwt:
+  secret: qwepuisdhfaksdjflsdfn12321___**
+  expiration: 60000

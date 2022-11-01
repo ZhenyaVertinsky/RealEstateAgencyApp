@@ -53,7 +53,7 @@ public class JdbcTemplateAgentRepository implements AgentRepositoryInterface {
     public Agent create(Agent object) {
         final String insertQuery =
                 "insert into entity.agents (agent_name, agent_surname, birthday, agent_phone, percent_reward, " +
-                        "creation_date, modification_date, is_deleted)" +
+                        "creation_date, modification_date, is_deleted, agent_login, agent_password)" +
                         "values (:agentName, :agentSurname, :birthday, :agentPhone, :percentReward, :creationDate, " +
                         ":modificationDate, :isDeleted, :login, :password);";
 

@@ -79,7 +79,7 @@ public class JdbcTemplateRoleRepository implements RoleRepositoryInterface{
     public List<Role> findRolesByAgentId(Long agentId) {
         return jdbcTemplate.query(
                 "select * from entity.roles " +
-                        " inner join entity.l_role_agentlru on roles.id = lra.role_id " +
+                        " inner join entity.l_role_agent lra on roles.id = lra.role_id " +
                         " where lra.agent_id = " + agentId,
                 rowMapper);
     }
