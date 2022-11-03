@@ -3,7 +3,9 @@ package com.verta.controller;
 import com.verta.controller.request.AgentCreateRequest;
 import com.verta.controller.request.AgentSearchRequest;
 import com.verta.domain.Agent;
+import com.verta.domain.hibernate.HibernateAgent;
 import com.verta.repository.agent.AgentRepositoryInterface;
+import com.verta.repository.hibernate.HibernateAgentInterface;
 import com.verta.service.AgentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -32,6 +34,19 @@ import java.util.Map;
 public class AgentRestController {
 
     private final AgentService agentService;
+
+    private final HibernateAgentInterface agentRepository;
+
+
+    @GetMapping
+    @RequestMapping("/hibernate")
+    //@ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Object> findAllHibernateAgents() {
+
+        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll()), HttpStatus.OK);
+
+        //return Collections.singletonMap("result", agentService.findAll());
+    }
 
     // first example
 //    @GetMapping
@@ -65,7 +80,7 @@ public class AgentRestController {
         List<Agent> agents = agentService.search(verifiedLimit, verifiedOffset);
 
         Map<String, Object> model = new HashMap<>();
-        model.put("agent", "Zhenya");
+        model.put("agent", "Victor");
         model.put("agents", agents);
 
         return new ResponseEntity<>(model, HttpStatus.OK);
