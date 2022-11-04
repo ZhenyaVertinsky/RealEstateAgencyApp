@@ -1,15 +1,22 @@
 package com.verta.domain.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.verta.domain.Gender;
 import lombok.Data;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,6 +24,7 @@ import java.sql.Timestamp;
 public class HibernateAgent {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "agent_name")
@@ -52,4 +60,8 @@ public class HibernateAgent {
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    @ManyToMany(mappedBy = "agents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JsonIgnoreProperties("users")
+    private List<HibernateRole> roles;
 }
