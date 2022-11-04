@@ -1,5 +1,6 @@
 package com.verta.domain.hibernate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.verta.domain.Gender;
 import lombok.Data;
@@ -43,18 +44,22 @@ public class HibernateAgent {
     private Integer percentReward;
 
     @Column(name = "creation_date")
+    @JsonIgnore
     private Timestamp creationDate;
 
     @Column(name = "modification_date")
+    @JsonIgnore
     private Timestamp modificationDate;
 
     @Column(name = "is_deleted")
+    @JsonIgnore
     private Boolean isDeleted;
 
     @Column(name = "agent_login")
     private String agentLogin;
 
     @Column(name = "agent_password")
+    @JsonIgnore
     private String agentPassword;
 
     @Column(name = "gender")
@@ -62,6 +67,6 @@ public class HibernateAgent {
     private Gender gender;
 
     @ManyToMany(mappedBy = "agents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JsonIgnoreProperties("users")
+    @JsonIgnoreProperties("agents")
     private List<HibernateRole> roles;
 }
