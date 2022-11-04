@@ -1,4 +1,4 @@
-package com.verta.security.jwt;
+package com.verta.configuration.security.jwt;
 
 import com.verta.configuration.JwtSecurityConfig;
 import io.jsonwebtoken.Claims;

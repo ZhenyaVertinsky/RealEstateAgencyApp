@@ -1,6 +1,6 @@
-package com.verta.security;
+package com.verta.configuration.security;
 
-import com.verta.security.jwt.JwtTokenHelper;
+import com.verta.configuration.security.jwt.JwtTokenHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -2,7 +2,7 @@ package com.verta.controller;
 
 import com.verta.controller.request.AuthRequest;
 import com.verta.controller.request.AuthResponse;
-import com.verta.security.jwt.JwtTokenHelper;
+import com.verta.configuration.security.jwt.JwtTokenHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

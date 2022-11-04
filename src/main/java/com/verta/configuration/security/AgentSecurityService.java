@@ -1,4 +1,4 @@
-package com.verta.security;
+package com.verta.configuration.security;
 
 
 import com.verta.domain.Agent;
