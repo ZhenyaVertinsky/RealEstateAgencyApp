@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -18,7 +20,9 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class HibernateAgentInterfaceImpl implements HibernateAgentInterface {
 
-    private final SessionFactory sessionFactory;
+//    private final SessionFactory sessionFactory;
+
+    private final EntityManagerFactory entityManagerFactory;
 
     @Override
     public HibernateAgent findById(Long id) {
@@ -32,18 +36,17 @@ public class HibernateAgentInterfaceImpl implements HibernateAgentInterface {
 
     @Override
     public List<HibernateAgent> findAll() {
-        try (Session session = sessionFactory.openSession()) {
-
-            return session.createQuery("select hb from HibernateAgent hb", HibernateAgent.class).getResultList();
-        }
+//        try (Session session = sessionFactory.openSession()) {
+//
+//            return session.createQuery("select hb from HibernateAgent hb", HibernateAgent.class).getResultList();
+//        }
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        return entityManager.createQuery("select hb from HibernateAgent hb", HibernateAgent.class).getResultList();
     }
 
     @Override
     public List<HibernateAgent> findAll(int limit, int offset) {
-        try (Session session = sessionFactory.openSession()) {
-
-            return session.createQuery("select hb from HibernateAgent hb", HibernateAgent.class).getResultList();
-        }
+        return null;
     }
 
     @Override
