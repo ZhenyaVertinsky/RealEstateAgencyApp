@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -43,5 +44,5 @@ public class HibernateRole {
             inverseJoinColumns = @JoinColumn(name = "agent_id")
     )
     @JsonIgnoreProperties("roles")
-    private List<HibernateAgent> agents;
+    private Set<HibernateAgent> agents;
 }

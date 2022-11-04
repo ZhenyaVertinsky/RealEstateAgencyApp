@@ -2,8 +2,10 @@ package com.verta.domain.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.verta.domain.Gender;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,12 +17,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
+@EqualsAndHashCode(exclude = {
+        "roles", "orders"
+})
 @Table(name = "agents")
 public class HibernateAgent {
 
@@ -68,5 +75,9 @@ public class HibernateAgent {
 
     @ManyToMany(mappedBy = "agents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("agents")
-    private List<HibernateRole> roles;
+    private Set<HibernateRole> roles;
+
+    @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private Set<HibernateAgentOrder> orders;
 }
