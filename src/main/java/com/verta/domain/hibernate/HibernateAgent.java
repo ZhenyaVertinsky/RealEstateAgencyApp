@@ -18,10 +18,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.Set;
+
 
 @Data
 @Entity
@@ -80,4 +81,9 @@ public class HibernateAgent {
     @OneToMany(mappedBy = "agent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     @JsonManagedReference
     private Set<HibernateAgentOrder> orders;
+
+    @OneToOne(mappedBy = "agent", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JsonManagedReference
+    private HibernateMedicalInfo info;
+
 }

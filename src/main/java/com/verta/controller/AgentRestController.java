@@ -3,8 +3,6 @@ package com.verta.controller;
 import com.verta.controller.request.AgentCreateRequest;
 import com.verta.controller.request.AgentSearchRequest;
 import com.verta.domain.Agent;
-import com.verta.domain.hibernate.HibernateAgent;
-import com.verta.repository.agent.AgentRepositoryInterface;
 import com.verta.repository.hibernate.HibernateAgentInterface;
 import com.verta.service.AgentService;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
 import java.util.Collections;
