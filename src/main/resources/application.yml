@@ -19,7 +19,7 @@ spring:
     password: destro123
     url: "jdbc:postgresql://localhost:5432/EstateAgency"
 server:
-  port: 8081
+  port: 8084
 
 ---
 
