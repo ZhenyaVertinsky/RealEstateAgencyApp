@@ -9,7 +9,9 @@ import java.util.Optional;
 
 public interface HibernateAgentInterface extends CRUDRepository<Long, HibernateAgent> {
 
-    Map<String, Object> getAgentsStats();
+//    Map<String, Object> getAgentsStats();
+
+    Object getAgentsStats();
 
     Optional<Agent> findByLogin(String login);
 

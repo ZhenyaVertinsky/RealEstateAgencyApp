@@ -41,6 +41,8 @@ public class AgentRestController {
 
         return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll()), HttpStatus.OK);
 
+//        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.getAgentsStats()), HttpStatus.OK);
+
         //return Collections.singletonMap("result", agentService.findAll());
     }
 
