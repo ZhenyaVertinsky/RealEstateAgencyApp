@@ -1,5 +1,6 @@
 package com.verta.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -30,6 +31,7 @@ public class Agent {
 
     private Timestamp birthday;
 
+    @JsonIgnore
     private String agentPhone;
 
     private Integer percentReward;
@@ -39,6 +41,10 @@ public class Agent {
     private Timestamp modificationDate;
 
     private Boolean isDeleted;
+
+    private String login;
+
+    private String password;
 
     @Override
     public String toString() {

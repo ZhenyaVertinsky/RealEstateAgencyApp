@@ -4,8 +4,6 @@ import com.verta.domain.Agent;
 import com.verta.repository.agent.AgentRepository;
 
 
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -52,5 +50,8 @@ public class Main {
         for (Map.Entry<String, Object> stringObjectEntry : agentStats.entrySet()) {
             System.out.println(stringObjectEntry.getValue());
         }
+
+        System.out.println("Hello");
+        System.out.println("Bye");
     }
 }

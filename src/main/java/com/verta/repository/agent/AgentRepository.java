@@ -3,8 +3,10 @@ package com.verta.repository.agent;
 import com.verta.domain.Agent;
 import com.verta.exeption.NoSuchEntityException;
 
-import com.verta.util.DatabasePropertiesReader;
-import org.apache.commons.lang3.StringUtils;
+
+import lombok.RequiredArgsConstructor;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,24 +20,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.verta.repository.agent.AgentTableColumns.BIRTH_DATE;
-import static com.verta.repository.agent.AgentTableColumns.CHANGED;
-import static com.verta.repository.agent.AgentTableColumns.CREATED;
-import static com.verta.repository.agent.AgentTableColumns.ID;
-import static com.verta.repository.agent.AgentTableColumns.IS_DELETED;
-import static com.verta.repository.agent.AgentTableColumns.NAME;
-import static com.verta.repository.agent.AgentTableColumns.PHONE;
-import static com.verta.repository.agent.AgentTableColumns.REWARD;
-import static com.verta.repository.agent.AgentTableColumns.SURNAME;
+import static com.verta.repository.columns.AgentTableColumns.BIRTH_DATE;
+import static com.verta.repository.columns.AgentTableColumns.CHANGED;
+import static com.verta.repository.columns.AgentTableColumns.CREATED;
+import static com.verta.repository.columns.AgentTableColumns.ID;
+import static com.verta.repository.columns.AgentTableColumns.IS_DELETED;
+import static com.verta.repository.columns.AgentTableColumns.NAME;
+import static com.verta.repository.columns.AgentTableColumns.PHONE;
+import static com.verta.repository.columns.AgentTableColumns.REWARD;
+import static com.verta.repository.columns.AgentTableColumns.SURNAME;
+import static com.verta.util.UUIDGenerator.generateUUID;
 
-import static com.verta.util.DatabasePropertiesReader.DATABASE_LOGIN;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_NAME;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_PASSWORD;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_PORT;
-import static com.verta.util.DatabasePropertiesReader.DATABASE_URL;
-import static com.verta.util.DatabasePropertiesReader.POSTGRES_DRIVER_NAME;
 
+@Repository
+//@Primary
+@RequiredArgsConstructor
 public class AgentRepository implements AgentRepositoryInterface {
+    private static final Logger log = Logger.getLogger(AgentRepository.class);
 
     @Override
     public Agent findById(Long id) {
@@ -53,11 +54,11 @@ public class AgentRepository implements AgentRepositoryInterface {
             if (hasRow) {
                 return agentRowMapping(rs);
             } else {
-                throw new NoSuchEntityException("Entity Agent with id " + id + " does not exist", 404);
+                throw new NoSuchEntityException("Entity Agent with id " + id + " does not exist", 404, generateUUID());
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            throw new RuntimeException("SQL Issues!");
+            log.error("DB connection process issues", e);
+            throw new RuntimeException("DB connection process issues");
         }
     }
 
@@ -72,27 +73,31 @@ public class AgentRepository implements AgentRepositoryInterface {
 
     private Connection getConnection() throws SQLException {
         try {
-            String driver = DatabasePropertiesReader.getProperty(POSTGRES_DRIVER_NAME);
+            String driver = "databaseProperties.getDriverName()";
 
             Class.forName(driver);
         } catch (ClassNotFoundException e) {
+            log.error("JDBC Driver Cannot be loaded!", e);
             System.err.println("JDBC Driver Cannot be loaded!");
             throw new RuntimeException("JDBC Driver Cannot be loaded!");
         }
 
-        String url = DatabasePropertiesReader.getProperty(DATABASE_URL);
-        String port = DatabasePropertiesReader.getProperty(DATABASE_PORT);
-        String dbName = DatabasePropertiesReader.getProperty(DATABASE_NAME);
-        String login = DatabasePropertiesReader.getProperty(DATABASE_LOGIN);
-        String password = DatabasePropertiesReader.getProperty(DATABASE_PASSWORD);
+        String url = "databaseProperties.getUrl()";
+//        String port = databaseProperties.getPort();
+//        String dbName = databaseProperties.getName();
+        String login = "databaseProperties.getLogin()";
+        String password = "databaseProperties.getPassword()";
 
-        String jdbcURL = StringUtils.join(url, port, dbName);
+//        String jdbcURL = StringUtils.join(url, port, dbName);
 
-        return DriverManager.getConnection(jdbcURL, login, password);
+//        return DriverManager.getConnection(jdbcURL, login, password);
+
+        return DriverManager.getConnection(url, login, password);
     }
 
     private Agent agentRowMapping(ResultSet rs) throws SQLException {
         Agent agent = new Agent();
+
         agent.setId(rs.getLong(ID));
         agent.setAgentName(rs.getString(NAME));
         agent.setAgentSurname(rs.getString(SURNAME));
@@ -140,6 +145,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return result;
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -180,6 +186,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return findById(userLastInsertId);
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -214,6 +221,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return findById(object.getId());
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -234,6 +242,7 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return id;
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
@@ -257,8 +266,14 @@ public class AgentRepository implements AgentRepositoryInterface {
 
             return Collections.singletonMap("avg", functionCall);
         } catch (SQLException e) {
+            log.error("DB connection process issues", e);
             System.err.println(e.getMessage());
             throw new RuntimeException("SQL Issues!");
         }
+    }
+
+    @Override
+    public Optional<Agent> findByLogin(String login) {
+        return Optional.empty();
     }
 }
