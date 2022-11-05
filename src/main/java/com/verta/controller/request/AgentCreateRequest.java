@@ -5,9 +5,9 @@ import lombok.Data;
 @Data
 public class AgentCreateRequest {
 
-    private String userName;
+    private String agentName;
 
-    private String surname;
+    private String agentSurname;
 
     private Integer percentReward;
 }
