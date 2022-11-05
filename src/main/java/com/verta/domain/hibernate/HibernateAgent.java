@@ -72,7 +72,7 @@ public class HibernateAgent {
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)
-    private Gender gender;
+    private Gender gender = Gender.NOT_SELECTED;
 
     @ManyToMany(mappedBy = "agents", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnoreProperties("agents")
