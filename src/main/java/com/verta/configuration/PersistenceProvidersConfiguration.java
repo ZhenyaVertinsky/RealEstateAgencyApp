@@ -32,7 +32,7 @@ public class PersistenceProvidersConfiguration {
 //        return sf;
 //    }
 
-    //Entity Manager
+//    Entity Manager
     @Autowired
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {

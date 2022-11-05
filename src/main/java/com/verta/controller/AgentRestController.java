@@ -2,6 +2,7 @@ package com.verta.controller;
 
 import com.verta.controller.request.AgentCreateRequest;
 import com.verta.controller.request.AgentSearchRequest;
+import com.verta.controller.request.SearchCriteria;
 import com.verta.domain.Agent;
 import com.verta.repository.hibernate.HibernateAgentInterface;
 import com.verta.service.AgentService;
@@ -41,7 +42,19 @@ public class AgentRestController {
 
         return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll()), HttpStatus.OK);
 
+//        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.getAgentsStats()), HttpStatus.OK);
+
         //return Collections.singletonMap("result", agentService.findAll());
+    }
+
+    @GetMapping
+    @RequestMapping("/hibernate/criteria")
+    //@ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Object> findAllHibernateAgents(@ModelAttribute SearchCriteria criteria) {
+
+        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.criteriaAPITest(criteria)), HttpStatus.OK);
+
+        //return Collections.singletonMap("result", userService.findAll());
     }
 
     // first example
@@ -57,6 +70,7 @@ public class AgentRestController {
 //    public Map<String, Object> findAllAgents() {
 //        return Collections.singletonMap("result", agentService.findAll());
 //    }
+
 
     // third example
     @GetMapping
@@ -94,8 +108,8 @@ public class AgentRestController {
     @PostMapping
     public ResponseEntity<Object> createAgent(@RequestBody AgentCreateRequest createRequest) {
         Agent agent = new Agent();
-        agent.setAgentName(createRequest.getUserName());
-        agent.setAgentSurname(createRequest.getSurname());
+        agent.setAgentName(createRequest.getAgentName());
+        agent.setAgentSurname(createRequest.getAgentSurname());
         agent.setBirthday(new Timestamp(new Date().getTime()));
         agent.setAgentPhone("375290000000");
         agent.setPercentReward(createRequest.getPercentReward());

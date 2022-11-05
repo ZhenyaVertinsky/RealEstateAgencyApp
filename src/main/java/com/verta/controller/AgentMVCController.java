@@ -73,8 +73,8 @@ public class AgentMVCController {
     //Jackson
     public ModelAndView createAgent(@RequestBody AgentCreateRequest createRequest) {
         Agent agent = new Agent();
-        agent.setAgentName(createRequest.getUserName());
-        agent.setAgentSurname(createRequest.getSurname());
+        agent.setAgentName(createRequest.getAgentName());
+        agent.setAgentSurname(createRequest.getAgentSurname());
         agent.setBirthday(new Timestamp(new Date().getTime()));
         agent.setAgentPhone("375290000000");
         agent.setPercentReward(createRequest.getPercentReward());
