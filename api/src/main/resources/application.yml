@@ -18,6 +18,14 @@ spring:
     username: postgres
     password: destro123
     url: "jdbc:postgresql://localhost:5432/EstateAgency"
+
+
+#      cache:
+#        type: Caffeine
+#        cache-names: roles
+#        caffeine:
+#          spec: initialCapacity=10,maximumSize=20, expireAfterAccess=10s
+
 server:
   port: 8082
 
