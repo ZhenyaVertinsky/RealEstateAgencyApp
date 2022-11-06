@@ -1,4 +1,4 @@
-package com.verta.controller.exceptionhandle;
+package com.verta.exceptionhandle;
 
 import com.verta.exeption.NoSuchEntityException;
 import com.verta.util.UUIDGenerator;

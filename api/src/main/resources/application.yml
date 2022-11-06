@@ -27,7 +27,7 @@ spring:
 #          spec: initialCapacity=10,maximumSize=20, expireAfterAccess=10s
 
 server:
-  port: 8082
+  port: 8083
 
 ---
 
