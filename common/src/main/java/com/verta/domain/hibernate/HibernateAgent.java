@@ -8,8 +8,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -67,12 +70,19 @@ public class HibernateAgent {
     @JsonIgnore
     private Boolean isDeleted;
 
-    @Column(name = "agent_login")
-    private String agentLogin;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "login", column = @Column(name = "agent_login")),
+            @AttributeOverride(name = "password", column = @Column(name = "agent_password"))
+    })
+    private Credentials credentials;
 
-    @Column(name = "agent_password")
-    @JsonIgnore
-    private String agentPassword;
+//    @Column(name = "agent_login")
+//    private String agentLogin;
+//
+//    @Column(name = "agent_password")
+//    @JsonIgnore
+//    private String agentPassword;
 
     @Column(name = "gender")
     @Enumerated(EnumType.STRING)

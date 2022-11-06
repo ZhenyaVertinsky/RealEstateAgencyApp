@@ -3,6 +3,7 @@ package com.verta.controller.springdata;
 import com.verta.controller.request.AgentCreateRequest;
 import com.verta.domain.Agent;
 import com.verta.domain.Gender;
+import com.verta.domain.hibernate.Credentials;
 import com.verta.domain.hibernate.HibernateAgent;
 import com.verta.repository.jdbctemplate.RoleRepositoryInterface;
 import com.verta.repository.springdata.AgentSpringDataRepository;
@@ -63,8 +64,15 @@ public class AgentController {
         agent.setModificationDate(new Timestamp(new Date().getTime()));
         agent.setIsDeleted(false);
 
-        agent.setAgentLogin(RandomStringUtils.randomAlphabetic(10));
-        agent.setAgentPassword(RandomStringUtils.randomAlphabetic(10));
+//        agent.setAgentLogin(RandomStringUtils.randomAlphabetic(10));
+//        agent.setAgentPassword(RandomStringUtils.randomAlphabetic(10));
+
+        Credentials credentials = new Credentials(
+                RandomStringUtils.randomAlphabetic(10),
+                RandomStringUtils.randomAlphabetic(10)
+        );
+
+        agent.setCredentials(credentials);
 
         HibernateAgent createdAgent = repository.save(agent);
 
