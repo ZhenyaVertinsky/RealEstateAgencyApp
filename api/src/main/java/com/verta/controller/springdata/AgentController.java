@@ -40,7 +40,8 @@ public class AgentController {
 //        return new ResponseEntity<>(Collections.singletonMap("result", repository.findAll()), HttpStatus.OK);
 
         return new ResponseEntity<>(Collections.singletonMap("result",
-                repository.findAll(PageRequest.of(0, 10))), HttpStatus.OK);
+//                repository.findAll(PageRequest.of(0, 10))), HttpStatus.OK);
+                repository.findByIsDeletedOrderByIdDesc(false)), HttpStatus.OK);
     }
 
     @GetMapping("/test")
@@ -76,7 +77,7 @@ public class AgentController {
 
         HibernateAgent createdAgent = repository.save(agent);
 
-        repository.createRoleRow(createdAgent.getId(),roleRepository.findById(2L).getId());
+        repository.createRoleRow(createdAgent.getId(), roleRepository.findById(2L).getId());
 
 
         Map<String, Object> model = new HashMap<>();

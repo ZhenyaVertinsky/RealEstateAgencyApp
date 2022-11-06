@@ -40,11 +40,13 @@ public class AgentRestController {
     //@ResponseStatus(HttpStatus.OK)
     public ResponseEntity<Object> findAllHibernateAgents() {
 
-        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll()), HttpStatus.OK);
+        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll(1, 1)), HttpStatus.OK);
+
+//        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.findAll()), HttpStatus.OK);
 
 //        return new ResponseEntity<>(Collections.singletonMap("result", agentRepository.getAgentsStats()), HttpStatus.OK);
 
-        //return Collections.singletonMap("result", agentService.findAll());
+//        return Collections.singletonMap("result", agentService.findAll());
     }
 
     @GetMapping

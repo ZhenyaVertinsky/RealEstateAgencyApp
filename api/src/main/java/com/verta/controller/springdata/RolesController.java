@@ -23,8 +23,7 @@ public class RolesController {
         System.out.println("-------------Start roles controller test ---------------");
 
         return new ResponseEntity<>(
-                Collections.singletonMap("result", repository.findAllCustom()),
-                HttpStatus.OK
-        );
+//                Collections.singletonMap("result", repository.findAllCustom()), HttpStatus.OK);
+                Collections.singletonMap("result", repository.findAll()), HttpStatus.OK);
     }
 }

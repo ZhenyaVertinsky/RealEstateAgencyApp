@@ -52,7 +52,7 @@ public class HibernateAgentInterfaceImpl implements HibernateAgentInterface {
                 " inner join HibernateMedicalInfo mi on mi.id = hb.id  " +
                 " where hb.percentReward > (select avg(h.id) from HibernateAgent h) and " +
                 " mi.bloodType = 2 " +
-                " " ;
+                " ";
 
 
 //        final String query = "select * from entity.agents";
@@ -69,7 +69,17 @@ public class HibernateAgentInterfaceImpl implements HibernateAgentInterface {
 
     @Override
     public List<HibernateAgent> findAll(int limit, int offset) {
-        return null;
+
+        /*Cache level 1*/
+        final String query = "select a from HibernateAgent a";
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+        List<HibernateAgent> agents = entityManager.createQuery(query, HibernateAgent.class).getResultList();
+
+        agents = entityManager.createQuery(query, HibernateAgent.class).getResultList();
+
+        return agents;
     }
 
     @Override
@@ -87,7 +97,7 @@ public class HibernateAgentInterfaceImpl implements HibernateAgentInterface {
         return null;
     }
 
-//    @Override
+    //    @Override
 //    public Map<String, Object> getAgentsStats() {
 //        return null;
 //    }

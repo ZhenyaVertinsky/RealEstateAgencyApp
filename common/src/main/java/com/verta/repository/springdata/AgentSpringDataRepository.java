@@ -28,6 +28,7 @@ public interface AgentSpringDataRepository extends CrudRepository<HibernateAgent
 
     List<HibernateAgent> findByCredentialsLoginAndAgentNameOrBirthdayOrderByIdDescAgentNameDesc(String login, String name, Timestamp birthDate);
 
+    List<HibernateAgent> findByIsDeletedOrderByIdDesc(Boolean isDeleted);
     //select * from m_agents where (login = ? and name = ?) or birthday = ?
 
     @Query(value = "select a from HibernateAgent a")
