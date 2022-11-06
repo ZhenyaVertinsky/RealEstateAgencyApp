@@ -1,4 +1,4 @@
-package com.verta.controller.exceptionhandle;
+package com.verta.exceptionhandle;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
