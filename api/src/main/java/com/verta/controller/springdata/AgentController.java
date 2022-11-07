@@ -1,6 +1,7 @@
 package com.verta.controller.springdata;
 
 import com.verta.controller.request.AgentCreateRequest;
+import com.verta.controller.request.RoleRequest;
 import com.verta.domain.Agent;
 import com.verta.domain.Gender;
 import com.verta.domain.hibernate.Credentials;
@@ -84,6 +85,12 @@ public class AgentController {
 //        );
 //
 //        agent.setCredentials(credentials);
+
+
+        RoleRequest roleRequest = new RoleRequest();
+
+        HibernateRole convertTest = converter.convert(roleRequest, HibernateRole.class);
+
 
         HibernateAgent agent = converter.convert(createRequest, HibernateAgent.class);
 //
